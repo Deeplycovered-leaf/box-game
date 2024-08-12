@@ -2,14 +2,13 @@
 definePageMeta({
   layout: 'home',
 })
-
 </script>
 
 <template>
   <div>
     <Suspense>
       <div>
-        index
+        <Game />
       </div>
       <template #fallback>
         <div italic op50>
@@ -17,6 +16,5 @@ definePageMeta({
         </div>
       </template>
     </Suspense>
-    <InputEntry />
   </div>
 </template>
