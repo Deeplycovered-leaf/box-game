@@ -8,7 +8,7 @@ const { map } = useMapStore()
 </script>
 
 <template>
-  <div flex flex-col items-center>
+  <div>
     <div v-for="row, i in map" :key="i" flex>
       <div v-for="_, j in row" :key="j">
         <img v-if="map[i][j] === MapTile.Wall" :src="WallIcon" alt="wall">

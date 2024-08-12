@@ -11,3 +11,6 @@ export const useMapStore = defineStore('map', () => {
     map,
   }
 })
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(useMapStore, import.meta.hot))

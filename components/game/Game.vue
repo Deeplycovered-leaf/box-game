@@ -3,8 +3,9 @@
 </script>
 
 <template>
-  <div>
+  <div relative>
     <GameMap />
+    <GamePlayer />
   </div>
 </template>
 
