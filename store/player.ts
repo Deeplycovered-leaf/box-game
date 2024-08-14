@@ -1,5 +1,4 @@
 import { useMapStore } from './map'
-import { MapTile } from '~/constants'
 
 export const usePlayerStore = defineStore('player', () => {
   const player = reactive({

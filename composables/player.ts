@@ -1,17 +1,5 @@
 import { usePlayerStore } from '~/store/player'
 
-export function usePosition() {
-  const { player } = usePlayerStore()
-  const STEP = 32
-
-  const position = computed(() => ({
-    left: `${player.x * STEP}px`,
-    top: `${player.y * STEP}px`,
-  }))
-
-  return { position }
-}
-
 export function useMove() {
   const { moveToLeft, moveToRight, moveToTop, moveToDown } = usePlayerStore()
 

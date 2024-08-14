@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import KeeperImg from '~/assets/keeper.png'
+import { usePlayerStore } from '~/store/player'
 
-const { position } = usePosition()
+const { player } = usePlayerStore()
+const { position } = usePosition(player)
 
 useMove()
 </script>

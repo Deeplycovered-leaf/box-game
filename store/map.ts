@@ -1,10 +1,6 @@
 import { MapTile } from '~/constants'
 
 type GameMap = MapTile[][]
-interface Position {
-  x: number
-  y: number
-}
 
 export const useMapStore = defineStore('map', () => {
   const map = [
