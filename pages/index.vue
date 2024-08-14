@@ -7,9 +7,11 @@ definePageMeta({
 <template>
   <div>
     <Suspense>
-      <div>
-        <Game />
-      </div>
+      <ClientOnly>
+        <div>
+          <Game />
+        </div>
+      </ClientOnly>
       <template #fallback>
         <div italic op50>
           <span animate-pulse>Loading...</span>

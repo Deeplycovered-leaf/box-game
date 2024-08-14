@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { useCargoStore } from '~/store/cargo'
 
-const { cargos } = useCargoStore()
+const { cargos, createCargo, addCargo } = useCargoStore()
+addCargo(createCargo(2, 1))
+addCargo(createCargo(2, 2))
 </script>
 
 <template>

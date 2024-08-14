@@ -4,11 +4,11 @@ type GameMap = MapTile[][]
 
 export const useMapStore = defineStore('map', () => {
   const map = [
-    [1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 1],
-    [1, 2, 2, 2, 1],
-    [1, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1],
   ]
 
   function setupMap(newMap: GameMap) {
@@ -16,7 +16,7 @@ export const useMapStore = defineStore('map', () => {
   }
 
   function isWall(position: Position) {
-    return map[position.x][position.y] === MapTile.Wall
+    return map[position.y][position.x] === MapTile.Wall
   }
 
   return {
