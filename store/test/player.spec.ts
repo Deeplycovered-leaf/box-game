@@ -114,15 +114,6 @@ describe('player', () => {
       ]
       const { setupMap } = useMapStore()
       setupMap(map)
-
-      // const { setupCargos } = useCargoStore()
-      // const cargos = [
-      //   {
-      //     x: 2,
-      //     y: 1,
-      //   },
-      // ]
-      // setupCargos(cargos)
     })
 
     it('should push a cargo to right', () => {
@@ -196,6 +187,34 @@ describe('player', () => {
       moveToRight()
 
       expect(player.x).toBe(4)
+    })
+
+    it('should not push cargo when cargo hits wall', () => {
+      const { createCargo, addCargo } = useCargoStore()
+      const cargo = createCargo(1, 1)
+      addCargo(cargo)
+      const { player, moveToLeft } = usePlayerStore()
+      player.x = 2
+      player.y = 1
+
+      moveToLeft()
+
+      expect(player.x).toBe(2)
+      expect(cargo.x).toBe(1)
+    })
+
+    it('should not push cargo  when cargo hits cargo', () => {
+      const { createCargo, addCargo } = useCargoStore()
+      const cargo1 = createCargo(1, 1)
+      addCargo(cargo1)
+      addCargo(createCargo(2, 1))
+      const { player, moveToLeft } = usePlayerStore()
+      player.x = 3
+
+      moveToLeft()
+
+      expect(player.x).toBe(3)
+      expect(cargo1.x).toBe(1)
     })
   })
 })
