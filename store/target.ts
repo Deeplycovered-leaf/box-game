@@ -1,5 +1,3 @@
-import { useCargoStore } from './cargo'
-
 let Id = 1
 export interface Target {
   x: number
