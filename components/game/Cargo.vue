@@ -1,16 +1,18 @@
 <script lang="ts" setup>
 import CargoImg from '~/assets/cargo.png'
+import CargoOnTargetImg from '~/assets/cargo_on_target.png'
+import type { Cargo } from '~/store'
 
 const props = defineProps<{
-  pos: Position
+  cargo: Cargo
 }>()
 
-const { position } = usePosition(props.pos)
+const { position } = usePosition(props.cargo)
 </script>
 
 <template>
   <div absolute :style="position">
-    <img :src="CargoImg" alt="cargo">
+    <img :src="cargo.isOnTarget ? CargoOnTargetImg : CargoImg" alt="cargo">
   </div>
 </template>
 

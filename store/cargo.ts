@@ -1,15 +1,17 @@
 import { useMapStore } from './map'
+import { useTargetStore } from './target'
 
 export interface Cargo {
   x: number
   y: number
+  isOnTarget: boolean
 }
 
 export const useCargoStore = defineStore('cargo', () => {
   const cargos: Cargo[] = reactive([])
 
   function createCargo(x: number, y: number): Cargo {
-    return { x, y }
+    return { x, y, isOnTarget: false }
   }
 
   function addCargo(cargo: Cargo) {
@@ -37,7 +39,14 @@ export const useCargoStore = defineStore('cargo', () => {
     cargo.x += dx
     cargo.y += dy
 
+    _detectionTarget(cargo)
+
     return true
+  }
+
+  function _detectionTarget(cargo: Cargo) {
+    const { findTarget } = useTargetStore()
+    cargo.isOnTarget = findTarget(cargo)
   }
 
   return {
