@@ -1,8 +1,10 @@
 import { useCargoStore } from './cargo'
 
+let Id = 1
 export interface Target {
   x: number
   y: number
+  id: number
 }
 
 export const useTargetStore = defineStore('target', () => {
@@ -14,7 +16,7 @@ export const useTargetStore = defineStore('target', () => {
   })
 
   function createTarget(x: number, y: number): Target {
-    return { x, y }
+    return { x, y, id: Id++ }
   }
 
   function addTarget(target: Target) {
@@ -26,7 +28,7 @@ export const useTargetStore = defineStore('target', () => {
   }
 
   function setupTargets(pos: Position[]) {
-    targets.splice(0, targets.length, ...pos)
+    targets.splice(0, targets.length, ...pos.map(c => createTarget(c.x, c.y)))
   }
 
   return {

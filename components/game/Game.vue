@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { levelData } from '~/constants/gameData'
+import { GameData } from '~/constants'
 import { useCargoStore, useGameStore, useTargetStore } from '~/store'
 
 const gameStore = useGameStore()
-gameStore.setupGame(levelData)
+gameStore.setupGame(GameData)
 
 const { targets } = useTargetStore()
 const { cargos } = useCargoStore()
@@ -12,11 +12,11 @@ const { cargos } = useCargoStore()
 <template>
   <div relative>
     <GameMap />
-    <GameTarget v-for="target, idx in targets" :key="idx" :pos="target" />
-    <GameCargo v-for="cargo, idx in cargos" :key="idx" :cargo />
+    <GameTarget v-for="target in targets" :key="target.id" :pos="target" />
+    <GameCargo v-for="cargo in cargos" :key="cargo.id" :cargo />
     <GamePlayer />
     <div v-if="gameStore.isComplete" text-left>
-      <button rounded bg-red p-2>
+      <button rounded bg-red p-2 @click="gameStore.toNextLevel">
         下一关
       </button>
     </div>

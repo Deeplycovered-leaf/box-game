@@ -5,16 +5,28 @@ import { type Target, useTargetStore } from './target'
 
 export interface LevelData {
   player: Player
-  targets: Target[]
-  cargos: Omit<Cargo, 'isOnTarget'>[]
+  targets: Omit<Target, 'id'>[]
+  cargos: Omit<Cargo, 'isOnTarget' | 'id'>[]
   map: GameMap
 }
+
+export type GameData = LevelData[]
 
 export const useGameStore = defineStore('game', () => {
   const { cargos } = useCargoStore()
   const isComplete = computed(() => cargos.every(c => c.isOnTarget))
 
-  function setupGame(data: LevelData) {
+  const level = ref(1)
+  let _gameDataList: GameData
+
+  function setupGame(gameData: GameData) {
+    _gameDataList = gameData
+    _setupLevel()
+  }
+
+  function _setupLevel() {
+    const data = _gameDataList[level.value - 1]
+
     const { setupMap } = useMapStore()
     const { setupPlayer } = usePlayerStore()
     const { setupTargets } = useTargetStore()
@@ -26,9 +38,16 @@ export const useGameStore = defineStore('game', () => {
     setupCargos(data.cargos)
   }
 
+  function toNextLevel() {
+    level.value++
+    _setupLevel()
+  }
+
   return {
     isComplete,
     setupGame,
+    level,
+    toNextLevel,
   }
 })
 

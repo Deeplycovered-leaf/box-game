@@ -6,6 +6,50 @@ import { useGameStore } from '../game'
 import { useMapStore } from '../map'
 import { usePlayerStore } from '../player'
 
+const firstLevelData = {
+  player: {
+    x: 1,
+    y: 1,
+  },
+  map: [
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+  ],
+  targets: [
+    { x: 1, y: 2 },
+    { x: 1, y: 3 },
+  ],
+  cargos: [
+    { x: 2, y: 2 },
+    { x: 2, y: 3 },
+  ],
+}
+const secondLevelData = {
+  player: {
+    x: 2,
+    y: 1,
+  },
+  map: [
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+  ],
+  targets: [
+    { x: 1, y: 2 },
+    { x: 1, y: 3 },
+  ],
+  cargos: [
+    { x: 3, y: 3 },
+    { x: 1, y: 3 },
+  ],
+}
+const gameData = [firstLevelData, secondLevelData]
+
 describe('game', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
@@ -31,9 +75,9 @@ describe('game', () => {
 
     moveCargo(cargo, 1, 0)
 
-    const { isComplete } = useGameStore()
+    const gameStore = useGameStore()
 
-    expect(isComplete).toBe(true)
+    expect(gameStore.isComplete).toBe(true)
   })
 
   it('should not game complete', () => {
@@ -47,41 +91,32 @@ describe('game', () => {
     moveCargo(cargo, 0, 1)
     moveCargo(cargo, 0, 1)
 
-    const { isComplete } = useGameStore()
+    const gameStore = useGameStore()
 
-    expect(isComplete).toBe(false)
+    expect(gameStore.isComplete).toBe(false)
   })
 
   it('should setup game', () => {
-    const levelData = {
-      player: {
-        x: 1,
-        y: 1,
-      },
-      map: [
-        [1, 1, 1, 1, 1, 1, 1],
-        [1, 2, 2, 2, 2, 2, 1],
-        [1, 2, 2, 2, 2, 2, 1],
-        [1, 2, 2, 2, 2, 2, 1],
-        [1, 1, 1, 1, 1, 1, 1],
-      ],
-      targets: [
-        { x: 1, y: 2 },
-        { x: 1, y: 3 },
-      ],
-      cargos: [
-        { x: 2, y: 2 },
-        { x: 2, y: 3 },
-      ],
-    }
-
     const { setupGame } = useGameStore()
 
-    setupGame(levelData)
+    setupGame(gameData)
 
-    expect(usePlayerStore().player).toEqual(levelData.player)
-    expect(useMapStore().map).toEqual(levelData.map)
-    expect(useTargetStore().targets).toEqual(levelData.targets)
-    // expect(useCargoStore().cargos).contains(levelData.cargos)
+    expect(usePlayerStore().player).toEqual(firstLevelData.player)
+    expect(useMapStore().map).toEqual(firstLevelData.map)
+    expect(useTargetStore().targets.length).toBe(firstLevelData.targets.length)
+    expect(useCargoStore().cargos.length).toBe(firstLevelData.cargos.length)
+  })
+
+  it('should next level game', () => {
+    const gameStore = useGameStore()
+
+    gameStore.setupGame(gameData)
+    gameStore.toNextLevel()
+
+    expect(gameStore.level).toBe(2)
+    expect(usePlayerStore().player).toEqual(secondLevelData.player)
+    expect(useMapStore().map).toEqual(secondLevelData.map)
+    expect(useTargetStore().targets.length).toEqual(secondLevelData.targets.length)
+    expect(useCargoStore().cargos.length).toBe(secondLevelData.cargos.length)
   })
 })
