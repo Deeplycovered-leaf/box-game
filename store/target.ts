@@ -10,11 +10,6 @@ export interface Target {
 export const useTargetStore = defineStore('target', () => {
   const targets: Target[] = reactive([])
 
-  const { cargos } = useCargoStore()
-  const isPass = computed(() => {
-    return targets.every(t => cargos.some(c => c.x === t.x && c.y === t.y))
-  })
-
   function createTarget(x: number, y: number): Target {
     return { x, y, id: Id++ }
   }
@@ -36,7 +31,6 @@ export const useTargetStore = defineStore('target', () => {
     setupTargets,
     createTarget,
     addTarget,
-    isPass,
     findTarget,
   }
 })

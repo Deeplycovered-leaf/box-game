@@ -11,6 +11,7 @@ export interface Cargo {
 
 export const useCargoStore = defineStore('cargo', () => {
   const cargos: Cargo[] = reactive([])
+  const isOnTargetAll = computed(() => cargos.every(c => c.isOnTarget))
 
   function createCargo(x: number, y: number): Cargo {
     return { x, y, isOnTarget: false, id: Id++ }
@@ -57,6 +58,7 @@ export const useCargoStore = defineStore('cargo', () => {
 
   return {
     cargos,
+    isOnTargetAll,
     setupCargos,
     createCargo,
     addCargo,

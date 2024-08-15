@@ -13,8 +13,8 @@ export interface LevelData {
 export type GameData = LevelData[]
 
 export const useGameStore = defineStore('game', () => {
-  const { cargos } = useCargoStore()
-  const isComplete = computed(() => cargos.every(c => c.isOnTarget))
+  const cargoStore = useCargoStore()
+  const isComplete = computed(() => cargoStore.isOnTargetAll)
 
   const level = ref(1)
   let _gameDataList: GameData
