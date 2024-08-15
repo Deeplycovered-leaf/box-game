@@ -33,3 +33,6 @@ export const useTargetStore = defineStore('target', () => {
     findTarget,
   }
 })
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(useTargetStore, import.meta.hot))

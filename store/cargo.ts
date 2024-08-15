@@ -57,3 +57,6 @@ export const useCargoStore = defineStore('cargo', () => {
     moveCargo,
   }
 })
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(useCargoStore, import.meta.hot))
