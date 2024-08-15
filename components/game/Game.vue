@@ -1,15 +1,12 @@
 <script lang="ts" setup>
+import { levelData } from '~/constants/gameData'
 import { useCargoStore, useGameStore, useTargetStore } from '~/store'
 
-const { targets, createTarget, addTarget } = useTargetStore()
-addTarget(createTarget(1, 2))
-addTarget(createTarget(1, 3))
-
-const { cargos, createCargo, addCargo } = useCargoStore()
-addCargo(createCargo(2, 2))
-addCargo(createCargo(2, 3))
-
 const gameStore = useGameStore()
+gameStore.setupGame(levelData)
+
+const { targets } = useTargetStore()
+const { cargos } = useCargoStore()
 </script>
 
 <template>

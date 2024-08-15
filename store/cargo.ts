@@ -49,8 +49,13 @@ export const useCargoStore = defineStore('cargo', () => {
     cargo.isOnTarget = findTarget(cargo)
   }
 
+  function setupCargos(newCargos: Omit<Cargo, 'isOnTarget'>[]) {
+    cargos.splice(0, cargos.length, ...newCargos.map(c => createCargo(c.x, c.y)))
+  }
+
   return {
     cargos,
+    setupCargos,
     createCargo,
     addCargo,
     findCargo,

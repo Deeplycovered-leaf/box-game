@@ -25,8 +25,13 @@ export const useTargetStore = defineStore('target', () => {
     return targets.some(t => t.x === pos.x && t.y === pos.y)
   }
 
+  function setupTargets(pos: Position[]) {
+    targets.splice(0, targets.length, ...pos)
+  }
+
   return {
     targets,
+    setupTargets,
     createTarget,
     addTarget,
     isPass,

@@ -1,15 +1,9 @@
 import { MapTile } from '~/constants'
 
-type GameMap = MapTile[][]
+export type GameMap = MapTile[][]
 
 export const useMapStore = defineStore('map', () => {
-  const map = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-  ]
+  const map = reactive<GameMap>([])
 
   function setupMap(newMap: GameMap) {
     map.splice(0, map.length, ...newMap)

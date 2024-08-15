@@ -1,10 +1,15 @@
 import { useCargoStore } from './cargo'
 import { useMapStore } from './map'
 
+export interface Player {
+  x: number
+  y: number
+}
+
 export const usePlayerStore = defineStore('player', () => {
-  const player = reactive({
-    x: 1,
-    y: 1,
+  const player = reactive<Player>({
+    x: 0,
+    y: 0,
   })
   const { isWall } = useMapStore()
   const { findCargo, moveCargo } = useCargoStore()
@@ -43,8 +48,14 @@ export const usePlayerStore = defineStore('player', () => {
     _move(0, 1)
   }
 
+  function setupPlayer(pos: Position) {
+    player.x = pos.x
+    player.y = pos.y
+  }
+
   return {
     player,
+    setupPlayer,
     moveToLeft,
     moveToRight,
     moveToTop,

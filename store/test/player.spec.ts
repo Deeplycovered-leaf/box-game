@@ -122,6 +122,7 @@ describe('player', () => {
       addCargo(cargo)
       const { player, moveToRight } = usePlayerStore()
       player.x = 1
+      player.y = 1
 
       moveToRight()
 
@@ -135,6 +136,7 @@ describe('player', () => {
       addCargo(cargo)
       const { player, moveToLeft } = usePlayerStore()
       player.x = 3
+      player.y = 1
 
       moveToLeft()
 
@@ -183,6 +185,7 @@ describe('player', () => {
 
       const { player, moveToRight } = usePlayerStore()
       player.x = 3
+      player.y = 1
 
       moveToRight()
 
