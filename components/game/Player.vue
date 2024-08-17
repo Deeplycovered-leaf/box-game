@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import KeeperImg from '~/assets/keeper.png'
 import { usePlayerStore } from '~/store/player'
 
 const { player } = usePlayerStore()
@@ -9,9 +8,7 @@ useMove()
 </script>
 
 <template>
-  <div absolute :style="position">
-    <img :src="KeeperImg" alt="player">
-  </div>
+  <IconPlayer absolute :style="position" />
 </template>
 
 <style scoped>
