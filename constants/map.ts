@@ -3,5 +3,5 @@ export enum MapTile {
   Floor = 2,
   Target = 3,
   Player = 4,
-  Goal = 5,
+  Cargo = 5,
 }

@@ -10,7 +10,7 @@
       </div>
       <div>data show zone</div>
     </div>
-    <div>element select zone</div>
+    <div><EditSelectElement /></div>
   </div>
 </template>
 
