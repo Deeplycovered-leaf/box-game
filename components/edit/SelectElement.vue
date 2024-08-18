@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type EditElement, floorEditEl, useEditElStore, useMapEditStore, wallEditEl } from '~/store'
+import { type EditElement, floorEditEl, playerEditEl, useEditElStore, useMapEditStore, wallEditEl } from '~/store'
 
 const editElStore = useEditElStore()
 const editMapStore = useMapEditStore()
@@ -41,12 +41,12 @@ function handleSelect(editEl: EditElement) {
       <IconWall @click="handleSelect(wallEditEl)" />
       <IconFloor @click="handleSelect(floorEditEl)" />
     </div>
-    <!-- <div flex items-center gap-2>
+    <div flex items-center gap-2>
       <h4>角色:</h4>
-      <IconPlayer @click="handleSelect(MapTile.Player)" />
-      <IconTarget @click="handleSelect(MapTile.Target)" />
-      <IconCargo @click="handleSelect(MapTile.Cargo)" />
-    </div> -->
+      <IconPlayer @click="handleSelect(playerEditEl)" />
+      <!-- <IconTarget @click="handleSelect(MapTile.Target)" />
+      <IconCargo @click="handleSelect(MapTile.Cargo)" /> -->
+    </div>
   </div>
 </template>
 

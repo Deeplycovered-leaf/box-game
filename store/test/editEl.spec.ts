@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useMapEditStore } from '../mapEdit'
-import { floorEditEl, useEditElStore, wallEditEl } from '../editEl'
+import { floorEditEl, playerEditEl, useEditElStore, wallEditEl } from '../editEl'
+import { useEditPlayerStore } from '../editPlayer'
 import { MapTile } from '~/constants'
 
 describe('editEl', () => {
@@ -33,5 +34,17 @@ describe('editEl', () => {
     editElStore.getCurrentElement().execute({ x: 1, y: 1 })
 
     expect(mapEditStore.map[1][1]).toBe(MapTile.Floor)
+  })
+
+  it('should update position of player when current selected el is player', () => {
+    const editPlayerStore = useEditPlayerStore()
+    const editElStore = useEditElStore()
+
+    editElStore.setCurrentElement(playerEditEl)
+    const position = { x: 1, y: 1 }
+    editElStore.getCurrentElement().execute(position)
+
+    expect(editPlayerStore.player.x).toBe(position.x)
+    expect(editPlayerStore.player.y).toBe(position.y)
   })
 })
