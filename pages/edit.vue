@@ -6,7 +6,9 @@
   <div>
     <div flex>
       <div class="w-2/3 bg-red">
-        <EditMap />
+        <ClientOnly>
+          <EditMap />
+        </ClientOnly>
       </div>
       <div>data show zone</div>
     </div>

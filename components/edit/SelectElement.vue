@@ -4,7 +4,19 @@ import { type EditElement, floorEditEl, useEditElStore, useMapEditStore, wallEdi
 const editElStore = useEditElStore()
 const editMapStore = useMapEditStore()
 
-editMapStore.initMap()
+editMapStore.initMap(8, 8)
+
+watchEffect(() => {
+  if (!editMapStore.row)
+    return
+  editMapStore.updateMapRow()
+})
+
+watchEffect(() => {
+  if (!editMapStore.col)
+    return
+  editMapStore.updateMapCol()
+})
 
 function handleSelect(editEl: EditElement) {
   editElStore.setCurrentElement(editEl)
