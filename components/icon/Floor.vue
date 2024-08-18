@@ -4,6 +4,6 @@ import FloorIcon from '~/assets/floor.png'
 
 <template>
   <div>
-    <img :src="FloorIcon" alt="floor">
+    <img :src="FloorIcon" alt="floor" draggable="false">
   </div>
 </template>

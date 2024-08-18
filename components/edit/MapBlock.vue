@@ -9,13 +9,30 @@ const props = defineProps<{
 
 const editMapStore = useMapEditStore()
 const editElStore = useEditElStore()
+
+const { startDrag, stopDrag, isDragging } = useDrag()
 function handleClick() {
   editElStore.getCurrentElement().execute(props)
+}
+
+function handleMouseDown() {
+  startDrag()
+  useEventListener(window, 'mouseup', stopDrag)
+}
+
+function handleMouseMove() {
+  if (isDragging())
+    editElStore.getCurrentElement()?.execute(props)
 }
 </script>
 
 <template>
-  <div b b-white @click="handleClick()">
+  <div
+    b b-white
+    @click="handleClick()"
+    @mousedown="handleMouseDown"
+    @mousemove="handleMouseMove"
+  >
     <IconWall v-if="editMapStore.map[props.y][props.x] === MapTile.Wall" />
     <IconFloor v-else-if="editMapStore.map[props.y][props.x] === MapTile.Floor" />
   </div>

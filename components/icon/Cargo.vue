@@ -4,6 +4,6 @@ import CargoImg from '~/assets/cargo.png'
 
 <template>
   <div>
-    <img :src="CargoImg" alt="cargo">
+    <img :src="CargoImg" alt="cargo" draggable="false">
   </div>
 </template>

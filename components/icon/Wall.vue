@@ -4,6 +4,6 @@ import WallIcon from '~/assets/wall.png'
 
 <template>
   <div>
-    <img :src="WallIcon" alt="wall">
+    <img :src="WallIcon" alt="wall" draggable="false">
   </div>
 </template>
