@@ -5,9 +5,11 @@ import { MapTile } from '~/constants'
 
 export interface EditElement {
   execute: (postion: Position) => void
+  name: string
 }
 
 export const wallEditEl: EditElement = {
+  name: '墙',
   execute(position: Position) {
     const mapEditStore = useMapEditStore()
     mapEditStore.map[position.y][position.x] = MapTile.Wall
@@ -15,6 +17,7 @@ export const wallEditEl: EditElement = {
 }
 
 export const floorEditEl: EditElement = {
+  name: '地板',
   execute(position: Position) {
     const mapEditStore = useMapEditStore()
     mapEditStore.map[position.y][position.x] = MapTile.Floor
@@ -22,6 +25,7 @@ export const floorEditEl: EditElement = {
 }
 
 export const playerEditEl: EditElement = {
+  name: '玩家',
   execute(position: Position) {
     const editPlayerStore = useEditPlayerStore()
     editPlayerStore.player.x = position.x
@@ -30,17 +34,18 @@ export const playerEditEl: EditElement = {
 }
 
 export const useEditElStore = defineStore('editEl', () => {
-  let currentElement: EditElement
+  const currentElement = ref<EditElement | undefined>()
 
   function setCurrentElement(name: EditElement) {
-    currentElement = name
+    currentElement.value = name
   }
 
   function getCurrentElement() {
-    return currentElement
+    return currentElement.value
   }
 
   return {
+    currentElement,
     setCurrentElement,
     getCurrentElement,
   }

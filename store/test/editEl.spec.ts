@@ -21,7 +21,7 @@ describe('editEl', () => {
     const editElStore = useEditElStore()
 
     editElStore.setCurrentElement(wallEditEl)
-    editElStore.getCurrentElement().execute({ x: 1, y: 1 })
+    editElStore.getCurrentElement()?.execute({ x: 1, y: 1 })
 
     expect(mapEditStore.map[1][1]).toBe(MapTile.Wall)
   })
@@ -31,7 +31,7 @@ describe('editEl', () => {
     const editElStore = useEditElStore()
 
     editElStore.setCurrentElement(floorEditEl)
-    editElStore.getCurrentElement().execute({ x: 1, y: 1 })
+    editElStore.getCurrentElement()?.execute({ x: 1, y: 1 })
 
     expect(mapEditStore.map[1][1]).toBe(MapTile.Floor)
   })
@@ -42,7 +42,7 @@ describe('editEl', () => {
 
     editElStore.setCurrentElement(playerEditEl)
     const position = { x: 1, y: 1 }
-    editElStore.getCurrentElement().execute(position)
+    editElStore.getCurrentElement()?.execute(position)
 
     expect(editPlayerStore.player.x).toBe(position.x)
     expect(editPlayerStore.player.y).toBe(position.y)

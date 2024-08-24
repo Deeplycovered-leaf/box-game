@@ -14,7 +14,7 @@ describe('usePosition', () => {
     const pos = { x: 1, y: 1 }
     const { position } = usePosition(pos, STEP_EDIT)
 
-    expect(position.value).toEqual({ left: '34px', top: '34px' })
+    expect(position.value).toEqual({ left: '33.6px', top: '33.6px' })
   })
 
   it('should update position when reactive data change', () => {

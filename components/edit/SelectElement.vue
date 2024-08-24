@@ -18,6 +18,12 @@ watchEffect(() => {
   editMapStore.updateMapCol()
 })
 
+const selectedElementName = computed(() => {
+  if (!editElStore.getCurrentElement())
+    return '没有选择'
+  return editElStore.getCurrentElement()?.name
+})
+
 function handleSelect(editEl: EditElement) {
   editElStore.setCurrentElement(editEl)
 }
@@ -46,6 +52,9 @@ function handleSelect(editEl: EditElement) {
       <IconPlayer @click="handleSelect(playerEditEl)" />
       <!-- <IconTarget @click="handleSelect(MapTile.Target)" />
       <IconCargo @click="handleSelect(MapTile.Cargo)" /> -->
+    </div>
+    <div>
+      当前选择: {{ selectedElementName }}
     </div>
   </div>
 </template>
