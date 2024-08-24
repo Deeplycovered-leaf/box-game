@@ -1,7 +1,6 @@
 import { useMapStore } from './map'
 import { useTargetStore } from './target'
 
-let Id = 1
 export interface Cargo {
   id: number
   x: number
@@ -14,7 +13,7 @@ export const useCargoStore = defineStore('cargo', () => {
   const isOnTargetAll = computed(() => cargos.every(c => c.isOnTarget))
 
   function createCargo(x: number, y: number): Cargo {
-    return { x, y, isOnTarget: false, id: Id++ }
+    return { x, y, isOnTarget: false, id: generateId() }
   }
 
   function addCargo(cargo: Cargo) {
