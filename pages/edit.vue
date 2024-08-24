@@ -11,7 +11,12 @@ const editCargoStore = useEditCargoStore()
         <ClientOnly>
           <EditMap />
           <EditPlayer />
-          <EditCargo v-for="cargo in editCargoStore.cargos" :key="cargo.id" :cargo />
+          <EditCargo
+            v-for="cargo in editCargoStore.cargos"
+            :key="cargo.id"
+            :cargo
+            @dblclick="editCargoStore.removeCargo(cargo)"
+          />
         </ClientOnly>
       </div>
       <div>data show zone</div>

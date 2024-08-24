@@ -14,5 +14,9 @@ export const useEditCargoStore = defineStore('editCargo', () => {
     cargos.push(cargo)
   }
 
-  return { cargos, createCargo, addCargo }
+  function removeCargo(pos: Position) {
+    cargos.splice(cargos.findIndex(c => c.x === pos.x && c.y === pos.y), 1)
+  }
+
+  return { cargos, createCargo, addCargo, removeCargo }
 })

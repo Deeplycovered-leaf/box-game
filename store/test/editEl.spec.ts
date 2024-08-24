@@ -68,4 +68,17 @@ describe('editEl', () => {
     expect(editCargoStore.cargos[0].x).toBe(position.x)
     expect(editCargoStore.cargos[0].y).toBe(position.y)
   })
+
+  it('should remove cargo when dbClick edit map cargo', () => {
+    const editCargoStore = useEditCargoStore()
+    const editElStore = useEditElStore()
+
+    editElStore.setCurrentElement(cargoEditEl)
+    const position = { x: 1, y: 1 }
+    editElStore.getCurrentElement()?.execute(position)
+
+    editCargoStore.removeCargo(position)
+
+    expect(editCargoStore.cargos.length).toBe(0)
+  })
 })
