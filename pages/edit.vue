@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import { useEditCargoStore } from '~/store'
 
+const editCargoStore = useEditCargoStore()
 </script>
 
 <template>
@@ -9,6 +11,7 @@
         <ClientOnly>
           <EditMap />
           <EditPlayer />
+          <EditCargo v-for="cargo in editCargoStore.cargos" :key="cargo.id" :cargo />
         </ClientOnly>
       </div>
       <div>data show zone</div>

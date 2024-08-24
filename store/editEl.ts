@@ -1,5 +1,5 @@
+import { useEditCargoStore } from './editCargo'
 import { useEditPlayerStore } from './editPlayer'
-import { useMapStore } from './map'
 import { useMapEditStore } from './mapEdit'
 import { MapTile } from '~/constants'
 
@@ -30,6 +30,15 @@ export const playerEditEl: EditElement = {
     const editPlayerStore = useEditPlayerStore()
     editPlayerStore.player.x = position.x
     editPlayerStore.player.y = position.y
+  },
+}
+
+export const cargoEditEl: EditElement = {
+  name: '箱子',
+  execute(position: Position) {
+    const editCargoStore = useEditCargoStore()
+    const cargo = editCargoStore.createCargo(position.x, position.y)
+    editCargoStore.addCargo(cargo)
   },
 }
 

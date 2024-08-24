@@ -12,7 +12,7 @@ const editElStore = useEditElStore()
 
 const { startDrag, stopDrag, isDragging } = useDrag()
 function handleClick() {
-  editElStore.getCurrentElement().execute(props)
+  editElStore.getCurrentElement()?.execute(props)
 }
 
 function handleMouseDown() {
