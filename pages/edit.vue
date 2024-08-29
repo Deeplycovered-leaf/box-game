@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { useEditCargoStore } from '~/store'
+import { useEditCargoStore, useEditTargetStore } from '~/store'
 
 const editCargoStore = useEditCargoStore()
+const editTargetStore = useEditTargetStore()
 </script>
 
 <template>
@@ -15,7 +16,11 @@ const editCargoStore = useEditCargoStore()
             v-for="cargo in editCargoStore.cargos"
             :key="cargo.id"
             :cargo
-            @dblclick="editCargoStore.removeCargo(cargo)"
+          />
+          <EditTarget
+            v-for="target in editTargetStore.targets"
+            :key="target.id"
+            :target
           />
         </ClientOnly>
       </div>

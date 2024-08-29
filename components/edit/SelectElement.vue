@@ -4,6 +4,7 @@ import {
   cargoEditEl,
   floorEditEl,
   playerEditEl,
+  targetEditEl,
   useEditElStore,
   useMapEditStore,
   wallEditEl,
@@ -59,8 +60,7 @@ function handleSelect(editEl: EditElement) {
       <h4>角色:</h4>
       <IconPlayer @click="handleSelect(playerEditEl)" />
       <IconCargo @click="handleSelect(cargoEditEl)" />
-      <!-- <IconTarget @click="handleSelect(MapTile.Target)" />
-       -->
+      <IconTarget @click="handleSelect(targetEditEl)" />
     </div>
     <div>
       当前选择: {{ selectedElementName }}

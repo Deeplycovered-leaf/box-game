@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { useMapEditStore } from '../mapEdit'
-import { cargoEditEl, floorEditEl, playerEditEl, useEditElStore, wallEditEl } from '../editEl'
+import { cargoEditEl, floorEditEl, playerEditEl, targetEditEl, useEditElStore, wallEditEl } from '../editEl'
 import { useEditPlayerStore } from '../editPlayer'
 import { useEditCargoStore } from '../editCargo'
+import { useEditTargetStore } from '../editTarget'
 import { MapTile } from '~/constants'
 
 describe('editEl', () => {
@@ -80,5 +81,18 @@ describe('editEl', () => {
     editCargoStore.removeCargo(position)
 
     expect(editCargoStore.cargos.length).toBe(0)
+  })
+
+  it('should remove target when dbClick edit map target', () => {
+    const editTargetStore = useEditTargetStore()
+    const editElStore = useEditElStore()
+
+    editElStore.setCurrentElement(targetEditEl)
+    const position = { x: 1, y: 1 }
+    editElStore.getCurrentElement()?.execute(position)
+
+    editTargetStore.removeTarget(position)
+
+    expect(editTargetStore.targets.length).toBe(0)
   })
 })
