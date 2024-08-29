@@ -7,26 +7,37 @@ const editTargetStore = useEditTargetStore()
 
 <template>
   <div>
-    <div flex>
-      <div class="relative w-2/3 bg-red">
-        <ClientOnly>
-          <EditMap />
-          <EditPlayer />
-          <EditCargo
-            v-for="cargo in editCargoStore.cargos"
-            :key="cargo.id"
-            :cargo
-          />
-          <EditTarget
-            v-for="target in editTargetStore.targets"
-            :key="target.id"
-            :target
-          />
-        </ClientOnly>
-      </div>
-      <div>data show zone</div>
-    </div>
-    <div><EditSelectElement /></div>
+    <Suspense>
+      <ClientOnly>
+        <div>
+          <div flex>
+            <div class="relative w-2/3 bg-red">
+              <EditMap />
+              <EditPlayer />
+              <EditCargo
+                v-for="cargo in editCargoStore.cargos"
+                :key="cargo.id"
+                :cargo
+              />
+              <EditTarget
+                v-for="target in editTargetStore.targets"
+                :key="target.id"
+                :target
+              />
+            </div>
+            <div class="w-1/3">
+              <EditDataDisplay />
+            </div>
+          </div>
+          <div><EditSelectElement /></div>
+        </div>
+      </ClientOnly>
+      <template #fallback>
+        <div italic op50>
+          <span animate-pulse>Loading...</span>
+        </div>
+      </template>
+    </Suspense>
   </div>
 </template>
 
